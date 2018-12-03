@@ -1,6 +1,41 @@
 pragma solidity ^0.5.0;
 
 /**
+ * @title SimpleTokenFlat
+ * @dev Very simple ERC20 Token example, where all tokens are pre-assigned to the creator.
+ * Note they can later distribute these tokens as they wish using `transfer` and other
+ * `ERC20` functions.
+ * 
+ * Note these instructions work as of 12/3/2018 and will need updating as Remix and Etherscan change.
+ * This file is designed to be used with Remix and MetaMask to create an ERC20 token with a fixed supply.
+ * Paste this code into Remix. Choose the compiler version of 0.5.0
+ * Make sure you have a few dollars of ethereum showing in MetaMask.
+ * On the Run tab change the ERC20 drop down and choose SimpleToken
+ * On the right of Deploy click the down arrow
+ *
+ * Enter your total number of coins eg 100 million is 100000000 which goes into _initialAmount
+ * Enter name of coin with quotes eg "Simple Coin" into _tokenName
+ * Decimals is usually 18 into _decimalUnits
+ * Enter symbol with quotes eg "SIMP" into _tokenSymbol
+ *
+ * Click transact, Confirm, then Confirm in MetaMask.
+ * Open the Etherscan link in a browser and wait for success.
+ * Click on the contract link in the To line eg 0xbc161a79922C7889145519Dd76EeFa50606E6B6C
+ * Click on the Code tab and open the Publish link.
+ * Enter SimpleToken into the contract
+ * Choose compiler version 0.5.0
+ * Optimization no
+ * Paste all these lines into the code area. You can remove these comments and add your own.
+ * At the bottom confirm you are not a robot and publish it
+ *
+ * The token is now created and published.
+ * In MetaMask click Add Token, Custom Token
+ * Enter your contract address from etherscan eg 0xbc161a79922C7889145519Dd76EeFa50606E6B6C
+ * Enter your symbol and number of decimals then next then add.
+ * Now you can see the tokens in MetaMask and can send them to another ethereum wallet address.
+ */
+
+/**
  * @title ERC20 interface
  * @dev see https://github.com/ethereum/EIPs/issues/20
  */
@@ -308,10 +343,7 @@ contract ERC20Detailed is IERC20 {
 }
 
 /**
- * @title SimpleToken
- * @dev Very simple ERC20 Token example, where all tokens are pre-assigned to the creator.
- * Note they can later distribute these tokens as they wish using `transfer` and other
- * `ERC20` functions.
+ * This is the contract used to deploy the ERC20 token
  */
 contract SimpleToken is ERC20, ERC20Detailed {
     /**
