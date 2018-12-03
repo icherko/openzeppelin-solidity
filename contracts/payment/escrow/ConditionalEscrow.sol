@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 import "./Escrow.sol";
 
@@ -13,10 +13,13 @@ contract ConditionalEscrow is Escrow {
     * implemented by derived contracts.
     * @param payee The destination address of the funds.
     */
-    function withdrawalAllowed(address payee) public view returns (bool);
+    function withdrawalAllowed(address payee) public view returns (bool) {
+        require(payee != address(0));
+        this;
+    }
 
-    function withdraw(address payee) public {
+    function withdraw(address payable payee) public {
         require(withdrawalAllowed(payee));
-        super.withdraw(payee);
+        super.withdraw(address(payee));
     }
 }

@@ -1,11 +1,11 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 /**
  * @title Secondary
  * @dev A Secondary contract can only be used by its primary account (the one that created it)
  */
 contract Secondary {
-    address private _primary;
+    address private  _primary;
 
     event PrimaryTransferred(
         address recipient

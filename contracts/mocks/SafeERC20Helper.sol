@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 import "../token/ERC20/IERC20.sol";
 import "../token/ERC20/SafeERC20.sol";
@@ -6,19 +6,19 @@ import "../token/ERC20/SafeERC20.sol";
 contract ERC20FailingMock {
     uint256 private _allowance;
 
-    function transfer(address, uint256) public returns (bool) {
+    function transfer(address, uint256) public pure returns (bool) {
         return false;
     }
 
-    function transferFrom(address, address, uint256) public returns (bool) {
+    function transferFrom(address, address, uint256) public pure returns (bool) {
         return false;
     }
 
-    function approve(address, uint256) public returns (bool) {
+    function approve(address, uint256) public pure returns (bool) {
         return false;
     }
 
-    function allowance(address, address) public view returns (uint256) {
+    function allowance(address, address) public pure returns (uint256) {
         return 0;
     }
 }
@@ -26,15 +26,15 @@ contract ERC20FailingMock {
 contract ERC20SucceedingMock {
     uint256 private _allowance;
 
-    function transfer(address, uint256) public returns (bool) {
+    function transfer(address, uint256) public pure returns (bool) {
         return true;
     }
 
-    function transferFrom(address, address, uint256) public returns (bool) {
+    function transferFrom(address, address, uint256) public pure returns (bool) {
         return true;
     }
 
-    function approve(address, uint256) public returns (bool) {
+    function approve(address, uint256) public pure returns (bool) {
         return true;
     }
 
@@ -54,8 +54,8 @@ contract SafeERC20Helper {
     IERC20 private _succeeding;
 
     constructor () public {
-        _failing = IERC20(new ERC20FailingMock());
-        _succeeding = IERC20(new ERC20SucceedingMock());
+        _failing = IERC20(address(new ERC20FailingMock()));
+        _succeeding = IERC20(address(new ERC20SucceedingMock()));
     }
 
     // Using _failing
@@ -103,7 +103,7 @@ contract SafeERC20Helper {
     }
 
     function setAllowance(uint256 allowance_) public {
-        ERC20SucceedingMock(_succeeding).setAllowance(allowance_);
+        ERC20SucceedingMock(address(_succeeding)).setAllowance(allowance_);
     }
 
     function allowance() public view returns (uint256) {

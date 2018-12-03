@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 import "../token/ERC20/IERC20.sol";
 import "../math/SafeMath.sol";
@@ -20,12 +20,12 @@ import "../utils/ReentrancyGuard.sol";
 contract Crowdsale is ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
-
+    
     // The token being sold
     IERC20 private _token;
 
     // Address where funds are collected
-    address private _wallet;
+    address payable private _wallet;
 
     // How many token units a buyer gets per wei.
     // The rate is the conversion between wei and the smallest and indivisible token unit.
@@ -53,10 +53,10 @@ contract Crowdsale is ReentrancyGuard {
      * @param wallet Address where collected funds will be forwarded to
      * @param token Address of the token being sold
      */
-    constructor (uint256 rate, address wallet, IERC20 token) internal {
+    constructor (uint256 rate, address payable wallet, IERC20 token) internal {
         require(rate > 0);
         require(wallet != address(0));
-        require(token != address(0));
+        require(address(token) != address(0));
 
         _rate = rate;
         _wallet = wallet;
@@ -87,7 +87,7 @@ contract Crowdsale is ReentrancyGuard {
     /**
      * @return the address where funds are collected.
      */
-    function wallet() public view returns (address) {
+    function wallet() public view returns (address payable) {
         return _wallet;
     }
 
@@ -145,6 +145,7 @@ contract Crowdsale is ReentrancyGuard {
     function _preValidatePurchase(address beneficiary, uint256 weiAmount) internal view {
         require(beneficiary != address(0));
         require(weiAmount != 0);
+        this;
     }
 
     /**
@@ -154,6 +155,9 @@ contract Crowdsale is ReentrancyGuard {
      */
     function _postValidatePurchase(address beneficiary, uint256 weiAmount) internal view {
         // optional override
+        require(beneficiary != address(0));
+        require(weiAmount != 0);
+        this;
     }
 
     /**
@@ -181,6 +185,9 @@ contract Crowdsale is ReentrancyGuard {
      */
     function _updatePurchasingState(address beneficiary, uint256 weiAmount) internal {
         // optional override
+        require(beneficiary != address(0));
+        require(weiAmount != 0);
+        _rate = _rate; //suppress warning
     }
 
     /**

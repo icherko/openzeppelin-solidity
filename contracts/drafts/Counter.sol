@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 /**
  * @title Counter
@@ -6,7 +6,7 @@ pragma solidity ^0.4.24;
  * @dev Provides an incrementing uint256 id acquired by the `Counter#next` getter.
  * Use this for issuing ERC721 ids or keeping track of request ids, anything you want, really.
  *
- * Include with `using Counter for Counter.Counter;`
+ * Include with `using Counter for Counter.Count;`
  * @notice Does not allow an Id of 0, which is popularly used to signify a null state in solidity.
  * Does not protect from overflows, but if you have 2^256 ids, you have other problems.
  * (But actually, it's generally impossible to increment a counter this many times, energy wise
