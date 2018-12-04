@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.1;
 
 /**
  * @title Counter
@@ -13,11 +13,11 @@ pragma solidity ^0.5.0;
  * so it's not something you have to worry about.)
  */
 library Counter {
-    struct Counter {
+    struct Count {
         uint256 current; // default: 0
     }
 
-    function next(Counter storage index) internal returns (uint256) {
+    function next(Count storage index) internal returns (uint256) {
         index.current += 1;
         return index.current;
     }

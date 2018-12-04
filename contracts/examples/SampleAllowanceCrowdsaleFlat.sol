@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.1;
 
 /**
  * This is a simple crowdsale for a token that has been created already.
